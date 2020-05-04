@@ -7,6 +7,7 @@ import styles from './styles.module.sass';
 import { ChatPreview } from '../../Components/ChatPreview';
 import { hideModal } from '../../store/actions/actionCreators';
 import { RegistrationForm } from '../../Components/Forms/RegistrationForm';
+import { LogInForm } from '../../Components/Forms/LogInForm';
 
 const chatsCollection = [
    {
@@ -59,6 +60,7 @@ const chatsCollection = [
 const Main = () => {
    const dispatch = useDispatch();
    const isModalOpen = useSelector((state) => state.app.isModalOpen);
+
    const isRegistrationForm = useSelector(
       (state) => state.app.isRegistrationForm,
    );
@@ -101,21 +103,23 @@ const Main = () => {
                </Grid>
             </Wrapper>
          </div>
-         <Modal
-            open={isModalOpen}
-            className={styles.Modal}
-            onEscapeKeyDown={() => dispatch(hideModal())}
-            onBackdropClick={() => dispatch(hideModal())}>
-            <div className={styles.FormContainer}>
-               <HighlightOffIcon
-                  className={styles.CloseBtn}
-                  color='action'
-                  fontSize='large'
-                  onClick={() => dispatch(hideModal())}
-               />
-               {isRegistrationForm ? <RegistrationForm /> : <div>Sign in</div>}
-            </div>
-         </Modal>
+         {isModalOpen && (
+            <Modal
+               open
+               className={styles.Modal}
+               onEscapeKeyDown={() => dispatch(hideModal())}
+               onBackdropClick={() => dispatch(hideModal())}>
+               <div className={styles.FormContainer}>
+                  <HighlightOffIcon
+                     className={styles.CloseBtn}
+                     color='action'
+                     fontSize='large'
+                     onClick={() => dispatch(hideModal())}
+                  />
+                  {isRegistrationForm ? <RegistrationForm /> : <LogInForm />}
+               </div>
+            </Modal>
+         )}
       </>
    );
 };

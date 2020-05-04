@@ -7,7 +7,7 @@ const ValidationSchema = Yup.object().shape({
    name: Yup.string()
       .min(2, 'Слишком короткий')
       .max(40, 'Слишком длинный')
-      .required('Введите никнейм'),
+      .required('Введите Ваше имя'),
    age: Yup.string().max(3, 'Слишком длинный'),
    city: Yup.string().min(2, 'Слишком короткий').max(40, 'Слишком длинный'),
    password: Yup.string().required('Введите пароль'),

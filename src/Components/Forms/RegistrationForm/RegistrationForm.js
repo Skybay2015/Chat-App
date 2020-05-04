@@ -1,13 +1,40 @@
 import React from 'react';
 import { Formik, Form } from 'formik';
+import { Button } from '@material-ui/core';
+import { useSelector, useDispatch } from 'react-redux';
 import { Input } from '../../Input';
 import styles from '../styles.module.sass';
-import { Button } from '@material-ui/core';
 import ValidationSchema from './validationSchema';
+import {
+   registerUser,
+   registerHideAlert,
+} from '../../../store/actions/actionCreators';
+import { Alert } from '../../Alert';
 
 const RegistrationForm = () => {
+   const dispatch = useDispatch();
+   const showAlert = useSelector((state) => state.registration.showAlert);
+   const message = useSelector((state) => state.registration.message);
+   const status = useSelector((state) => state.registration.status);
    return (
       <Formik
+         onSubmit={(
+            { email, name, age, city, password },
+            { resetForm, _, setSubmitting },
+         ) => {
+            dispatch(
+               registerUser({
+                  url: 'http://localhost:8080/api/addUser',
+                  email,
+                  name,
+                  age,
+                  city,
+                  password,
+                  resetForm,
+                  setSubmitting,
+               }),
+            );
+         }}
          validationSchema={ValidationSchema}
          initialValues={{
             email: '',
@@ -19,7 +46,16 @@ const RegistrationForm = () => {
          }}>
          {({ isSubmitting }) => (
             <Form className={styles.Form}>
-               <h2 className={styles.Title}>Регистрационная форма</h2>
+               <h2 className={styles.Title}>Регистрация</h2>
+
+               {showAlert && (
+                  <Alert
+                     className={styles.Alert}
+                     handleClose={() => dispatch(registerHideAlert())}
+                     status={status}
+                     message={message}
+                  />
+               )}
 
                <Input
                   className={styles.Input}
@@ -32,7 +68,7 @@ const RegistrationForm = () => {
                   className={styles.Input}
                   type='text'
                   name='name'
-                  placeholder='Введите Ваш никнейм *'
+                  placeholder='Введите Ваше имя *'
                />
 
                <Input

@@ -40,20 +40,33 @@ const Header = () => {
                      </div>
                   )}
 
-                  <Button
-                     color='secondary'
-                     variant='contained'
-                     className={styles.Header_item}
-                     onClick={() => dispatch(showLogInForm())}>
-                     Войти
-                  </Button>
-                  <Button
-                     color='secondary'
-                     variant='contained'
-                     className={styles.Header_item}
-                     onClick={() => dispatch(showRegistrationForm())}>
-                     Регистрация
-                  </Button>
+                  {!isLoggedIn && (
+                     <>
+                        <Button
+                           color='secondary'
+                           variant='contained'
+                           className={styles.Header_item}
+                           onClick={() => dispatch(showLogInForm())}>
+                           Войти
+                        </Button>
+                        <Button
+                           color='secondary'
+                           variant='contained'
+                           className={styles.Header_item}
+                           onClick={() => dispatch(showRegistrationForm())}>
+                           Регистрация
+                        </Button>
+                     </>
+                  )}
+
+                  {isLoggedIn && (
+                     <Button
+                        color='secondary'
+                        variant='contained'
+                        className={styles.Header_item}>
+                        Мой кабинет
+                     </Button>
+                  )}
                </Toolbar>
             </Wrapper>
          </AppBar>

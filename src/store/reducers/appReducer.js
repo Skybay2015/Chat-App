@@ -3,12 +3,15 @@ import {
    HIDE_MODAL,
    SHOW_REGISTRATION_FORM,
    SHOW_LOG_IN_FORM,
+   LOG_IN_USER,
+   REGISTER_USER_ERROR,
 } from '../types';
 
 const initialState = {
    isLoggedIn: false,
    isModalOpen: false,
    isRegistrationForm: true,
+   user: null,
 };
 
 export default (state = initialState, action) => {
@@ -35,6 +38,19 @@ export default (state = initialState, action) => {
          return {
             ...state,
             isRegistrationForm: false,
+         };
+
+      case LOG_IN_USER:
+         return {
+            ...state,
+            isLoggedIn: true,
+            user: action.payload,
+         };
+
+      case REGISTER_USER_ERROR:
+         return {
+            ...state,
+            error: action.payload,
          };
 
       default:

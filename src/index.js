@@ -6,7 +6,7 @@ import createSagaMiddleware from 'redux-saga';
 import { createStore, applyMiddleware, compose } from 'redux';
 import * as serviceWorker from './serviceWorker';
 import rootReducer from './store/reducers/rootReducer';
-import { sagaFormsWatcher } from './store/sagas/sagas';
+import { sagaFormsWatcher, sagaRegistrationWatcher } from './store/sagas/sagas';
 
 const sagaMiddleware = createSagaMiddleware();
 
@@ -20,6 +20,7 @@ const store = createStore(
 );
 
 sagaMiddleware.run(sagaFormsWatcher);
+sagaMiddleware.run(sagaRegistrationWatcher);
 
 ReactDOM.render(
    <React.StrictMode>
