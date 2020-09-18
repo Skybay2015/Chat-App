@@ -5,14 +5,14 @@ require('dotenv').config();
 const app = express();
 const cors = require('cors');
 const PORT = process.env.PORT;
-const registrationRouter = require('./routers/registrationRouter');
+const usersRouter = require('./routers/usersRouter');
 
 app.use(express.json());
 app.use(bodyParser.json({ type: 'application/*+json' }));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cors());
 
-app.use('/api', registrationRouter);
+app.use('/api', usersRouter);
 const mongodb_uri = process.env.MongoDB;
 
 mongoose

@@ -1,13 +1,27 @@
 import React from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { Formik, Form } from 'formik';
 import { Button } from '@material-ui/core';
 import { Input } from '../../Input';
 import styles from '../styles.module.sass';
 import ValidationSchema from './validationSchema';
+import { logInUser } from '../../../store/actions/actionCreators';
+import { Alert } from '../../Alert';
 
 const LogInForm = () => {
+   const dispatch = useDispatch();
    return (
       <Formik
+         onSubmit={(values, { resetForm, _, setSubmitting }) => {
+            dispatch(
+               logInUser({
+                  url: 'http://localhost:8000/api/getUser',
+                  ...values,
+                  resetForm,
+                  setSubmitting,
+               }),
+            );
+         }}
          validationSchema={ValidationSchema}
          initialValues={{
             email: '',

@@ -21,4 +21,19 @@ router.route('/addUser').post((req, res) => {
    });
 });
 
+router.route('/getUser').post((req, res) => {
+   const { email, password } = req.body;
+
+   User.findOne({ email }, (_, user) => {
+      if (user) {
+         if (password !== user.password) {
+            return res.status(401).json({ message: 'Неверный пароль' });
+         }
+         return res.status(200).json(user);
+      } else {
+         return res.status(400).json({ message: 'Пользователь не найден' });
+      }
+   });
+});
+
 module.exports = router;

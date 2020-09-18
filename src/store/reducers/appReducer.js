@@ -5,6 +5,8 @@ import {
    SHOW_LOG_IN_FORM,
    LOG_IN_USER,
    REGISTER_USER_ERROR,
+   LOG_IN_USER_SUCCESS,
+   LOG_OUT_SUCCEED,
 } from '../types';
 
 const initialState = {
@@ -40,17 +42,25 @@ export default (state = initialState, action) => {
             isRegistrationForm: false,
          };
 
-      case LOG_IN_USER:
+      case LOG_IN_USER_SUCCESS:
+         console.log(action);
          return {
             ...state,
             isLoggedIn: true,
-            user: action.payload,
+            user: { ...action.payload.user },
          };
 
       case REGISTER_USER_ERROR:
          return {
             ...state,
             error: action.payload,
+         };
+
+      case LOG_OUT_SUCCEED:
+         return {
+            ...state,
+            user: null,
+            isLoggedIn: false,
          };
 
       default:

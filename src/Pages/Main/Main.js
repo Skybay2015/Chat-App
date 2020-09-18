@@ -104,21 +104,19 @@ const Main = () => {
             </Wrapper>
          </div>
          {isModalOpen && (
-            <Modal
-               open
-               className={styles.Modal}
-               onEscapeKeyDown={() => dispatch(hideModal())}
-               onBackdropClick={() => dispatch(hideModal())}>
-               <div className={styles.FormContainer}>
-                  <HighlightOffIcon
-                     className={styles.CloseBtn}
-                     color='action'
-                     fontSize='large'
-                     onClick={() => dispatch(hideModal())}
-                  />
-                  {isRegistrationForm ? <RegistrationForm /> : <LogInForm />}
+            <div className={styles.Modal}>
+               <div className={styles.Modal_content}>
+                  <div className={styles.FormContainer}>
+                     <HighlightOffIcon
+                        className={styles.CloseBtn}
+                        color='action'
+                        fontSize='large'
+                        onClick={() => dispatch(hideModal())}
+                     />
+                     {isRegistrationForm ? <RegistrationForm /> : <LogInForm />}
+                  </div>
                </div>
-            </Modal>
+            </div>
          )}
       </>
    );

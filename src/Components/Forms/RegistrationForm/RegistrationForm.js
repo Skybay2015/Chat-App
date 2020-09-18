@@ -24,7 +24,7 @@ const RegistrationForm = () => {
          ) => {
             dispatch(
                registerUser({
-                  url: 'http://localhost:8080/api/addUser',
+                  url: 'http://localhost:8000/api/addUser',
                   email,
                   name,
                   age,

@@ -9,6 +9,10 @@ import {
    REGISTER_USER_SUCCESS,
    REGISTER_USER_START,
    REGISTER_HIDE_ALERT,
+   LOG_IN_USER_SUCCESS,
+   LOG_IN_TIMEOUT,
+   LOG_OUT,
+   LOG_OUT_SUCCEED,
 } from '../types';
 
 export const showModal = () => {
@@ -69,9 +73,34 @@ export const registerHideAlert = () => {
 };
 
 export const logInUser = (payload) => {
-   console.log(payload);
    return {
       type: LOG_IN_USER,
       payload,
+   };
+};
+
+export const logInUserSuccess = (payload) => {
+   return {
+      type: LOG_IN_USER_SUCCESS,
+      payload,
+   };
+};
+
+export const logOut = () => {
+   return {
+      type: LOG_OUT,
+   };
+};
+
+export const logoutSucceed = () => {
+   return {
+      type: LOG_OUT_SUCCEED,
+   };
+};
+
+export const checkAuthTimeout = (payload) => {
+   return {
+      type: LOG_IN_TIMEOUT,
+      payload: payload,
    };
 };
